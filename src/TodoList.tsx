@@ -1,10 +1,16 @@
-import React from 'react';
-
-const TodoList = () => {
+import React, {FC} from 'react';
+// описываем тип данных кот будет принмать в качестве параметров функция Todolist
+type TodoListPropsType = {
+    title: string
+}
+// т.е эта функция будет принимать в качестве параметров обьект, кот будет содержать поле title значением которго явл строка
+// и в качестве параметров компоненты передает обьект (props)
+const TodoList: FC<TodoListPropsType> = (props) => {
     return (
         <div>
             <div className="todolist">
-                <h3> What to learn</h3>
+{/*вместо заголовка будем брать обьект props и брать из него свойтсво title и использовать эту строку в качестве заголовка*/}
+                <h3>{props.title}</h3>
                 <div>
                     <input/>
                     <button>+</button>
