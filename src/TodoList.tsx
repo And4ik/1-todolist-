@@ -3,7 +3,7 @@ import {TaskType} from "./App";
 // описываем тип данных который  будет принимать в качестве параметров функция Todolist
 type TodoListPropsType = {
     title: string
-    tasks: Array<TaskType>
+    task: Array<TaskType>
 }
 // т.е эта функция будет принимать в качестве параметров обьект, кот будет содержать поле title значением которго явл строка
 // и в качестве параметров компоненты передает обьект (props)
@@ -13,7 +13,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
     return (
         <div>
             <div className="todolist">
-{/*вместо заголовка будем брать обьект props и брать из него свойтсво title и использовать эту строку в качестве заголовка*/}
+                {/*вместо заголовка будем брать обьект props и брать из него свойтсво title и использовать эту строку в качестве заголовка*/}
                 <h3>{props.title}</h3>
                 <div>
                     <input/>
@@ -21,16 +21,16 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 </div>
                 <ul>
                     <li>
-                        <input type="checkbox" checked={props.tasks[0].isDone}/>
+                        <input type="checkbox" checked={props.task[0].isDone}/>
                         {/*из обьекта props берем нулевой элемент массив tasks и берем еще название title*/}
-                        <span>{props.tasks[0].title}</span>
+                        <span>{props.task[0].title}</span>
                     </li>
                     <li>
-                        <input type="checkbox" checked={props.tasks[1].isDone}/>
-                        <span>{props.tasks[1].title}</span>
+                        <input type="checkbox" checked={props.task[1].isDone}/>
+                        <span>{props.task[1].title}</span>
                     </li>
-                    <li><input type="checkbox" checked={props.tasks[2].isDone}/>
-                        <span>{props.tasks[2].title}</span>
+                    <li><input type="checkbox" checked={props.task[2].isDone}/>
+                        <span>{props.task[2].title}</span>
                     </li>
                 </ul>
                 <div>
@@ -40,7 +40,9 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                 </div>
             </div>
         </div>
+
     );
 };
 
 export default TodoList;
+

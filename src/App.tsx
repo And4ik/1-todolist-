@@ -19,9 +19,10 @@ function App(): JSX.Element {
     ]
     return (
         <div className="App">
-            <TodoList title={"What to read"} tasks={tasks}/>
-            <TodoList title={"What to read"} tasks={tasks}/>
-            {/*<TodoList title={"What to bue"}/>*/}
+            {/*в качестве тасок мы передаем массив tasks*/}
+            <TodoList title={"What to read"} task={tasks}/>
+            <TodoList title={"What to bye"} task={tasks}/>
+            {/*<TodoList title={"What to bue"} />*/}
             {/*<TodoList title={"What to learn"}/>*/}
             {/*<TodoList title={"What"}/>*/}
         </div>
