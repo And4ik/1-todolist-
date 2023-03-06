@@ -3,13 +3,25 @@ import {TaskType} from "./App";
 // описываем тип данных который  будет принимать в качестве параметров функция Todolist
 type TodoListPropsType = {
     title: string
-    task: Array<TaskType>
+    tasks: Array<TaskType>
+    removeTask: (taskId: number) => void
 }
 // т.е эта функция будет принимать в качестве параметров обьект, кот будет содержать поле title значением которго явл строка
 // и в качестве параметров компоненты передает обьект (props)
 
 // запихиваем таски в копмоненты TodoList. Но сначала описать в типе Type что эти данные сюда придут
 const TodoList: FC<TodoListPropsType> = (props) => {
+
+    const todoListItems = props.tasks.map((task) => {
+        return (
+            <li>
+                <input type="checkbox" checked={task.isDone}/>
+                <span>{task.title}</span>
+                <button onClick={() => {props.removeTask(task.id)}}>x</button>
+            </li>
+        )
+    }
+    )
     return (
         <div>
             <div className="todolist">
@@ -20,18 +32,7 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     <button>+</button>
                 </div>
                 <ul>
-                    <li>
-                        <input type="checkbox" checked={props.task[0].isDone}/>
-                        {/*из обьекта props берем нулевой элемент массив tasks и берем еще название title*/}
-                        <span>{props.task[0].title}</span>
-                    </li>
-                    <li>
-                        <input type="checkbox" checked={props.task[1].isDone}/>
-                        <span>{props.task[1].title}</span>
-                    </li>
-                    <li><input type="checkbox" checked={props.task[2].isDone}/>
-                        <span>{props.task[2].title}</span>
-                    </li>
+                    {todoListItems}
                 </ul>
                 <div>
                     <button>All</button>
@@ -45,4 +46,3 @@ const TodoList: FC<TodoListPropsType> = (props) => {
 };
 
 export default TodoList;
-

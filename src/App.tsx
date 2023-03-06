@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 
@@ -12,16 +12,33 @@ export type TaskType = {
 }
 function App(): JSX.Element {
     // в переменной будет лежать массив элементов типа TaskType. Cоздается набор тасок для одного тудулиста
-    const tasks: TaskType[] = [
-        {id: 1, title:"HTML & CSS", isDone: true},
-        {id: 2, title:"CSS & SCSS", isDone: true},
-        {id: 3, title:"ES6/TS", isDone: false},
-    ]
+     const [tasks, setTasks] = useState([
+                {id: 1, title:"HTML & CSS", isDone: true},
+                {id: 2, title:"CSS & SCSS", isDone: true},
+                {id: 3, title:"ES^/TS", isDone: false},
+                {id: 4, title:"Redux", isDone: false},
+            ])
+
+    const removeTask = (taskId: number) => {
+        setTasks(tasks.filter((task)=> task.id !== taskId))
+    }
+// меняем отображение кнопок тасок
+    const [filter, setFilter] = useState <"all" | "active" | "completed">("all")
+    let tasksForRender: Array<TaskType> = []
+    if(filter === "all"){
+        tasksForRender = tasks
+    }
+    if(filter === "active"){
+        tasksForRender = tasks.filter(t => t.isDone === false)
+    }
+    if (filter ==="completed"){
+        tasksForRender = tasks.filter(t => t.isDone === true)
+    }
+
     return (
         <div className="App">
             {/*в качестве тасок мы передаем массив tasks*/}
-            <TodoList title={"What to read"} task={tasks}/>
-            <TodoList title={"What to bye"} task={tasks}/>
+            <TodoList title={"What to read"} tasks={tasksForRender} removeTask={removeTask}/>
             {/*<TodoList title={"What to bue"} />*/}
             {/*<TodoList title={"What to learn"}/>*/}
             {/*<TodoList title={"What"}/>*/}
