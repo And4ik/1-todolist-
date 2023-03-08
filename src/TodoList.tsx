@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
-import {TaskType} from "./App";
+import {FilterValuesType, TaskType} from "./App";
 // описываем тип данных который  будет принимать в качестве параметров функция Todolist
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (taskId: number) => void
+    changeTodoListFilter: (filter:FilterValuesType) => void
 }
 // т.е эта функция будет принимать в качестве параметров обьект, кот будет содержать поле title значением которго явл строка
 // и в качестве параметров компоненты передает обьект (props)
@@ -35,9 +36,9 @@ const TodoList: FC<TodoListPropsType> = (props) => {
                     {todoListItems}
                 </ul>
                 <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Complited</button>
+                    <button onClick={() => {props.changeTodoListFilter("all")}}>All</button>
+                    <button onClick={() => {props.changeTodoListFilter("active")}}>Active</button>
+                    <button onClick={() => {props.changeTodoListFilter("completed")}}>Completed</button>
                 </div>
             </div>
         </div>

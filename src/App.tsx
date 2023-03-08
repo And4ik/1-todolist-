@@ -5,6 +5,8 @@ import TodoList from "./TodoList";
 // JSX.Element чтобы проследить что в ретурне действительно лежит JSX
 
 // создадим тип описывающий одну таску,это будет обьект( у каждой такски будет id-число, title-название, idDone - cтатус (выполнено или нет)
+
+export type FilterValuesType = "all" | "active" | "completed"
 export type TaskType = {
     id: number
     title: string
@@ -23,7 +25,11 @@ function App(): JSX.Element {
         setTasks(tasks.filter((task)=> task.id !== taskId))
     }
 // меняем отображение кнопок тасок
-    const [filter, setFilter] = useState <"all" | "active" | "completed">("all")
+    const [filter, setFilter] = useState<FilterValuesType>("active")
+    const changeTodoListFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+    }
+
     let tasksForRender: Array<TaskType> = []
     if(filter === "all"){
         tasksForRender = tasks
@@ -38,7 +44,10 @@ function App(): JSX.Element {
     return (
         <div className="App">
             {/*в качестве тасок мы передаем массив tasks*/}
-            <TodoList title={"What to read"} tasks={tasksForRender} removeTask={removeTask}/>
+            <TodoList title={"What to read"}
+                      tasks={tasksForRender}
+                      removeTask={removeTask}
+                      changeTodoListFilter={changeTodoListFilter}/>
             {/*<TodoList title={"What to bue"} />*/}
             {/*<TodoList title={"What to learn"}/>*/}
             {/*<TodoList title={"What"}/>*/}
